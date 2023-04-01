@@ -1,15 +1,15 @@
 import { ss } from '@/utils/storage'
 
-const LOCAL_NAME = 'SECRET_TOKEN'
+const LOCAL_NAME = 'API_KEY'
 
-export function getToken() {
+export function getApiKey() {
   return ss.get(LOCAL_NAME)
 }
 
-export function setToken(token: string) {
-  return ss.set(LOCAL_NAME, token)
+export function setApiKey(key: string) {
+  return ss.set(LOCAL_NAME, key)
 }
 
-export function removeToken() {
+export function removeApiKey() {
   return ss.remove(LOCAL_NAME)
 }

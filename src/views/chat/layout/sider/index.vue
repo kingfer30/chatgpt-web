@@ -80,6 +80,7 @@ watch(
           <List />
         </div>
         <div class="p-4">
+          <NButton @click="$router.push({ name: 'testPage' })">Go to Table Page</NButton>
           <NButton block @click="show = true">
             {{ $t('store.siderButton') }}
           </NButton>

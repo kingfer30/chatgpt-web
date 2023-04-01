@@ -1,30 +1,22 @@
 import { defineStore } from 'pinia'
-import { getToken, removeToken, setToken } from './helper'
+import { getApiKey, removeApiKey, setApiKey } from './helper'
 import { store } from '@/store'
 import { fetchSession } from '@/api'
 
 interface SessionResponse {
-  auth: boolean
-  model: 'ChatGPTAPI' | 'ChatGPTUnofficialProxyAPI'
+  token: string | undefined
 }
 
 export interface AuthState {
-  token: string | undefined
+  key: string | undefined
   session: SessionResponse | null
 }
 
 export const useAuthStore = defineStore('auth-store', {
   state: (): AuthState => ({
-    token: getToken(),
+    key: getApiKey(),
     session: null,
   }),
-
-  getters: {
-    isChatGPTAPI(state): boolean {
-      return state.session?.model === 'ChatGPTAPI'
-    },
-  },
-
   actions: {
     async getSession() {
       try {
@@ -37,14 +29,12 @@ export const useAuthStore = defineStore('auth-store', {
       }
     },
 
-    setToken(token: string) {
-      this.token = token
-      setToken(token)
+    setApiKey(token: string) {
+      setApiKey(token)
     },
 
-    removeToken() {
-      this.token = undefined
-      removeToken()
+    removeApiKey() {
+      removeApiKey()
     },
   },
 })
