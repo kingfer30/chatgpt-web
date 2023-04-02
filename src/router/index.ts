@@ -19,20 +19,6 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/test',
-    component: ChatLayout,
-    name: 'testPage',
-    redirect: '/test',
-    children: [
-      {
-        path: '/test',
-        name: 'testPage',
-        component: () => import('@/views/test/index.vue'),
-      },
-    ],
-  },
-
-  {
     path: '/404',
     name: '404',
     component: () => import('@/views/exception/404/index.vue'),

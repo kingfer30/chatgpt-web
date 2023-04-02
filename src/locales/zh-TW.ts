@@ -49,6 +49,7 @@ export default {
     clearHistoryConfirm: '確定清除紀錄?',
     preview: '預覽',
     showRawText: '顯示原文',
+    unsetApiKey: '請先設定請求的API Key',
   },
   setting: {
     setting: '設定',
@@ -69,6 +70,9 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余額',
+    setToken: 'API Key設定',
+    setTokenTip: '請輸入API Key',
+    setTokenFreeTip: '免費獲取API Key',
   },
   store: {
     siderButton: '提示詞商店',

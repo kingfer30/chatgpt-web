@@ -1,7 +1,6 @@
 <script setup lang='ts'>
 import { computed, ref } from 'vue'
-import { NButton, NInput, NModal, useMessage } from 'naive-ui'
-import { fetchVerify } from '@/api'
+import { NButton, NInput, NModal, NSpace, useMessage } from 'naive-ui'
 import { useAuthStore } from '@/store'
 import Icon403 from '@/icons/403.vue'
 
@@ -17,6 +16,7 @@ const ms = useMessage()
 
 const loading = ref(false)
 const token = ref('')
+const showImg = ref(false)
 
 const disabled = computed(() => !token.value.trim() || loading.value)
 
@@ -28,8 +28,8 @@ async function handleVerify() {
 
   try {
     loading.value = true
-    await fetchVerify(secretKey)
     authStore.setToken(secretKey)
+    authStore.setAuth(true)
     ms.success('success')
     window.location.reload()
   }
@@ -64,16 +64,25 @@ function handlePress(event: KeyboardEvent) {
           </p>
           <Icon403 class="w-[200px] m-auto" />
         </header>
-        <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
-        <NButton
-          block
-          type="primary"
-          :disabled="disabled"
-          :loading="loading"
-          @click="handleVerify"
-        >
-          {{ $t('common.verify') }}
-        </NButton>
+        <NInput v-model:value="token" type="password" placeholder="请输入API Key" @keypress="handlePress" />
+        <NSpace justify="center">
+          <NButton type="primary" :disabled="disabled" :loading="loading" @click="handleVerify">
+            {{ $t('setting.setting') }}
+          </NButton>
+          <NButton color="#ff5758" :loading="loading" @click="showImg = true">
+            {{ $t('setting.setTokenFreeTip') }}
+          </NButton>
+        </NSpace>
+      </div>
+    </div>
+  </NModal>
+  <NModal :show="showImg" @update:show="showImg = false">
+    <div class="p-10 bg-white rounded dark:bg-slate-800">
+      <div class="flex justify-center">
+        <img src="@/assets/store.jpg" class="w-48">
+      </div>
+      <div class="text-red-500">
+        扫描二维码，关注TB店铺后，回复"滴滴"即可~
       </div>
     </div>
   </NModal>

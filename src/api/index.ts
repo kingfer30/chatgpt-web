@@ -1,6 +1,6 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
 import { post } from '@/utils/request'
-import { useSettingStore } from '@/store'
+import { useAuthStore } from '@/store'
 
 export function fetchChatAPI<T = any>(
   prompt: string,
@@ -27,19 +27,13 @@ export function fetchChatAPIProcess<T = any>(
     signal?: GenericAbortSignal
     onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void },
 ) {
-  const settingStore = useSettingStore()
+  const authStore = useAuthStore()
 
   return post<T>({
-    url: '/chat-process',
-    data: { prompt: params.prompt, options: params.options, systemMessage: settingStore.systemMessage },
+    url: '/completions',
+    data: { prompt: params.prompt, options: params.options, is_chat: 1, token: authStore.token },
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,
-  })
-}
-
-export function fetchSession<T>() {
-  return post<T>({
-    url: '/session',
   })
 }
 

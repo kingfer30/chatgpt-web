@@ -49,6 +49,7 @@ export default {
     clearHistoryConfirm: 'Are you sure to clear chat history?',
     preview: 'Preview',
     showRawText: 'Show as raw text',
+    unsetApiKey: 'Please set the requested API Key first',
   },
   setting: {
     setting: 'Setting',
@@ -69,6 +70,9 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API Balance',
+    setToken: 'API Key Setting',
+    setTokenTip: 'Please enter the API Key',
+    setTokenFreeTip: 'Get free API Key',
   },
   store: {
     siderButton: 'Prompt Store',

@@ -1,20 +1,24 @@
 <script setup lang='ts'>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { NLayout, NLayoutContent } from 'naive-ui'
+import { NAlert, NLayout, NLayoutContent, NLayoutHeader } from 'naive-ui'
 import Sider from './sider/index.vue'
+import Token from './Token.vue'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useAppStore, useChatStore } from '@/store'
+import { useAppStore, useAuthStore, useChatStore } from '@/store'
 
 const router = useRouter()
 const appStore = useAppStore()
 const chatStore = useChatStore()
+const authStore = useAuthStore()
 
 router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
 
 const { isMobile } = useBasicLayout()
 
 const collapsed = computed(() => appStore.siderCollapsed)
+
+const needToken = computed(() => !authStore.auth)
 
 const getMobileClass = computed(() => {
   if (isMobile.value)
@@ -35,6 +39,11 @@ const getContainerClass = computed(() => {
     <div class="h-full overflow-hidden" :class="getMobileClass">
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider>
         <Sider />
+        <NLayoutHeader>
+          <NAlert title="通知" type="info">
+            系统首发，即日起至4月15日，赠送15分钟免费对讲
+          </NAlert>
+        </NLayoutHeader>
         <NLayoutContent class="h-full">
           <RouterView v-slot="{ Component, route }">
             <component :is="Component" :key="route.fullPath" />
@@ -42,5 +51,12 @@ const getContainerClass = computed(() => {
         </NLayoutContent>
       </NLayout>
     </div>
+    <Token :visible="needToken" />
   </div>
 </template>
+
+<style>
+.n-layout-scroll-container{
+  flex-direction: column !important;
+}
+</style>
