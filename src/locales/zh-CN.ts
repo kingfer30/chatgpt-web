@@ -49,7 +49,7 @@ export default {
     clearHistoryConfirm: '确定清空聊天记录?',
     preview: '预览',
     showRawText: '显示原文',
-    unsetApiKey: '请先设置请求的API Key',
+    unsetApiKey: '请先设置请求的Token令牌',
   },
   setting: {
     setting: '设置',
@@ -69,10 +69,10 @@ export default {
     timeout: '超时',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'API余额',
-    setToken: 'API Key设置',
-    setTokenTip: '请输入API Key',
-    setTokenFreeTip: '免费获取API Key',
+    balance: 'Token令牌余额',
+    setToken: 'Token令牌设置',
+    setTokenTip: '请输入Token令牌',
+    setTokenFreeTip: '免费获取Token令牌',
   },
   store: {
     siderButton: '提示词商店',

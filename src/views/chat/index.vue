@@ -85,6 +85,7 @@ async function onConversation() {
   addChat(
     +uuid,
     {
+      currentUsage: '',
       dateTime: new Date().toLocaleString(),
       text: message,
       inversion: true,
@@ -139,8 +140,9 @@ async function onConversation() {
               +uuid,
               dataSources.value.length - 1,
               {
+                currentUsage: data.usage.total_tokens,
                 dateTime: new Date().toLocaleString(),
-                text: lastText + data.text ?? '',
+                text: lastText + (data.text ?? ''),
                 inversion: false,
                 error: false,
                 loading: true,
@@ -271,7 +273,7 @@ async function onRegenerate(index: number) {
               index,
               {
                 dateTime: new Date().toLocaleString(),
-                text: lastText + data.text ?? '',
+                text: lastText + (data.text ?? ''),
                 inversion: false,
                 error: false,
                 loading: true,
@@ -519,17 +521,17 @@ onUnmounted(() => {
     <footer :class="footerClass">
       <div class="w-full max-w-screen-xl m-auto">
         <div class="flex items-center justify-between space-x-2">
-          <HoverButton @click="handleClear">
+          <HoverButton :tooltip="t('chat.clearChat')" @click="handleClear">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:delete-bin-line" />
             </span>
           </HoverButton>
-          <HoverButton v-if="!isMobile" @click="handleExport">
+          <HoverButton v-if="!isMobile" :tooltip="t('chat.exportImage')" @click="handleExport">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:download-2-line" />
             </span>
           </HoverButton>
-          <HoverButton v-if="!isMobile" @click="toggleUsingContext">
+          <HoverButton v-if="!isMobile" :tooltip="t('chat.usingContext')" @click="toggleUsingContext">
             <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
               <SvgIcon icon="ri:chat-history-line" />
             </span>

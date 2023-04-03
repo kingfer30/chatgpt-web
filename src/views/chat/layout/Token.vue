@@ -64,7 +64,7 @@ function handlePress(event: KeyboardEvent) {
           </p>
           <Icon403 class="w-[200px] m-auto" />
         </header>
-        <NInput v-model:value="token" type="password" placeholder="请输入API Key" @keypress="handlePress" />
+        <NInput v-model:value="token" type="password" placeholder="请输入Token令牌" @keypress="handlePress" />
         <NSpace justify="center">
           <NButton type="primary" :disabled="disabled" :loading="loading" @click="handleVerify">
             {{ $t('setting.setting') }}

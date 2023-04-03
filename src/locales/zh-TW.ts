@@ -49,7 +49,7 @@ export default {
     clearHistoryConfirm: '確定清除紀錄?',
     preview: '預覽',
     showRawText: '顯示原文',
-    unsetApiKey: '請先設定請求的API Key',
+    unsetApiKey: '請先設定請求的Token令牌',
   },
   setting: {
     setting: '設定',
@@ -69,10 +69,10 @@ export default {
     timeout: '逾時',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'API余額',
-    setToken: 'API Key設定',
-    setTokenTip: '請輸入API Key',
-    setTokenFreeTip: '免費獲取API Key',
+    balance: 'Token令牌余額',
+    setToken: 'Token令牌設定',
+    setTokenTip: '請輸入Token令牌',
+    setTokenFreeTip: '免費獲取Token令牌',
   },
   store: {
     siderButton: '提示詞商店',
