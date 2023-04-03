@@ -151,7 +151,8 @@ async function onConversation() {
               },
             )
 
-            if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
+            if (openLongReply) {
+              window.console.log(data)
               options.parentMessageId = data.id
               lastText = data.text
               message = ''

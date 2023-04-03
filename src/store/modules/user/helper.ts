@@ -16,7 +16,7 @@ export function defaultSetting(): UserState {
   return {
     userInfo: {
       avatar: 'https://raw.githubusercontent.com/kingfer30/chatgpt-web/main/src/assets/avatar.png',
-      name: '智能人机对讲系统',
+      name: 'AI智能人机对讲系统',
       description: 'chat.aichat199.com',
     },
   }
