@@ -10,7 +10,7 @@ import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 
 interface Props {
-  usage?: string
+  currentUsage?: string
   dateTime?: string
   text?: string
   inversion?: boolean
@@ -97,7 +97,7 @@ function handleRegenerate() {
       <div class="text-xs text-[#b4bbc4] flex justify-between" :class="[inversion ? 'text-right' : 'text-left']">
         <div>{{ dateTime }}</div>
         <div class="text-red-600">
-          {{ usage }}
+          {{ currentUsage }}
         </div>
       </div>
       <div
