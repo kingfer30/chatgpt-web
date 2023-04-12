@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import type { Ref } from 'vue'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, h, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { NAutoComplete, NButton, NInput, useDialog, useMessage } from 'naive-ui'
@@ -36,8 +36,8 @@ const { usingContext, toggleUsingContext } = useUsingContext()
 
 const { uuid } = route.params as { uuid: string }
 
-const dataSources = computed(() => chatStore.getChatByUuid(+uuid))
-const conversationList = computed(() => dataSources.value.filter(item => (!item.inversion && !item.error)))
+const dataSources = computed(() => chatStore.getChatByUuid(uuid))
+const conversationList = computed(() => dataSources.value.filter(item => (!item.inversion && !!item.conversationOptions)))
 
 const prompt = ref<string>('')
 const loading = ref<boolean>(false)
@@ -53,12 +53,12 @@ let lastText = ''
 
 let options: Chat.ConversationRequest = {}
 
-initSocket({
+initSocket(uuid, {
   onMsg: (data) => {
     const { text, usage, conversationId, parentMessageId } = data
     try {
       updateChat(
-        +uuid,
+        uuid,
         dataSources.value.length - 1,
         {
           currentUsage: usage,
@@ -82,10 +82,10 @@ initSocket({
     lastText = ''
     const msg = data?.msg ?? t('common.wrong')
 
-    const currentChat = getChatByUuidAndIndex(+uuid, dataSources.value.length - 1)
+    const currentChat = getChatByUuidAndIndex(uuid, dataSources.value.length - 1)
     if (currentChat?.text && currentChat.text !== '') {
       updateChatSome(
-        +uuid,
+        uuid,
         dataSources.value.length - 1,
         {
           text: `${currentChat.text}\n[${msg}]`,
@@ -93,13 +93,13 @@ initSocket({
           loading: false,
         },
       )
-      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+      updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
       scrollToBottomIfAtBottom()
       return
     }
 
     updateChat(
-      +uuid,
+      uuid,
       dataSources.value.length - 1,
       {
         dateTime: new Date().toLocaleString(),
@@ -111,17 +111,18 @@ initSocket({
         requestOptions: { prompt: prompt.value, options: { ...options } },
       },
     )
-    updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+    updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
     scrollToBottomIfAtBottom()
   },
   onFinish: (data) => {
     lastText = ''
     window.console.log(data)
-    updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+    updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
   },
   onClose: (data) => {
+    window.console.log(data)
     updateChat(
-      +uuid,
+      uuid,
       dataSources.value.length - 1,
       {
         currentUsage: '0',
@@ -135,14 +136,29 @@ initSocket({
       },
     )
     scrollToBottomIfAtBottom()
-    updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+    updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
+  },
+  onAlert: (data) => {
+    dialog.warning({
+      closable: false,
+      closeOnEsc: false,
+      maskClosable: false,
+      title: t('common.alert'),
+      content: () => {
+        return h('div', {
+          innerHTML:
+          data.text,
+        })
+      },
+      positiveText: t('common.confirm'),
+    })
   },
 })
 
 // 未知原因刷新页面，loading 状态不会重置，手动重置
 dataSources.value.forEach((item, index) => {
   if (item.loading)
-    updateChatSome(+uuid, index, { loading: false })
+    updateChatSome(uuid, index, { loading: false })
 })
 
 function handleSubmit() {
@@ -172,7 +188,7 @@ async function onConversation() {
   controller = new AbortController()
 
   addChat(
-    +uuid,
+    uuid,
     {
       currentUsage: '',
       dateTime: new Date().toLocaleString(),
@@ -194,7 +210,7 @@ async function onConversation() {
     options = { ...lastContext }
 
   addChat(
-    +uuid,
+    uuid,
     {
       dateTime: new Date().toLocaleString(),
       text: '',
@@ -221,15 +237,15 @@ async function onConversation() {
     const errorMessage = error?.message ?? t('common.wrong')
 
     if (error.message === 'canceled') {
-      updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
+      updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
       scrollToBottomIfAtBottom()
       return
     }
 
-    const currentChat = getChatByUuidAndIndex(+uuid, dataSources.value.length - 1)
+    const currentChat = getChatByUuidAndIndex(uuid, dataSources.value.length - 1)
     if (currentChat?.text && currentChat.text !== '') {
       updateChatSome(
-        +uuid,
+        uuid,
         dataSources.value.length - 1,
         {
           text: `${currentChat.text}\n[${errorMessage}]`,
@@ -241,7 +257,7 @@ async function onConversation() {
     }
 
     updateChat(
-      +uuid,
+      uuid,
       dataSources.value.length - 1,
       {
         dateTime: new Date().toLocaleString(),
@@ -278,7 +294,7 @@ async function onRegenerate(index: number) {
   loading.value = true
 
   updateChat(
-    +uuid,
+    uuid,
     index,
     {
       dateTime: new Date().toLocaleString(),
@@ -304,7 +320,7 @@ async function onRegenerate(index: number) {
   catch (error: any) {
     if (error.message === 'canceled') {
       updateChatSome(
-        +uuid,
+        uuid,
         index,
         {
           loading: false,
@@ -315,7 +331,7 @@ async function onRegenerate(index: number) {
 
     const errorMessage = error?.message ?? t('common.wrong')
     updateChat(
-      +uuid,
+      uuid,
       index,
       {
         dateTime: new Date().toLocaleString(),
@@ -385,7 +401,7 @@ function handleDelete(index: number) {
     positiveText: t('common.yes'),
     negativeText: t('common.no'),
     onPositiveClick: () => {
-      chatStore.deleteChatByUuid(+uuid, index)
+      chatStore.deleteChatByUuid(uuid, index)
     },
   })
 }
@@ -400,7 +416,7 @@ function handleClear() {
     positiveText: t('common.yes'),
     negativeText: t('common.no'),
     onPositiveClick: () => {
-      chatStore.clearChatByUuid(+uuid)
+      chatStore.clearChatByUuid(uuid)
     },
   })
 }

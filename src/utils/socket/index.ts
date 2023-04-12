@@ -1,7 +1,7 @@
 import { useAuthStore } from '@/store'
 
 interface ResponseMessage {
-  msgType: 'auth' | 'msg' | 'count' | 'finish' | 'error'
+  msgType: 'auth' | 'msg' | 'count' | 'finish' | 'error' | 'alert'
   data: any
 }
 interface SocketOption {
@@ -9,9 +9,10 @@ interface SocketOption {
   onFinish: (data: any) => void
   onError: (data: any) => void
   onClose: (data?: any) => void
+  onAlert: (data?: any) => void
 }
 
-export function initSocket({ onMsg, onFinish, onError, onClose }: SocketOption) {
+export function initSocket(uuid: any, { onMsg, onFinish, onError, onClose, onAlert }: SocketOption) {
   const authStore = useAuthStore()
 
   const socket = new WebSocket(import.meta.env.VITE_SOCKET_URL)
@@ -25,6 +26,8 @@ export function initSocket({ onMsg, onFinish, onError, onClose }: SocketOption) 
         return onFinish(reslut.data)
       case 'error':
         return onError(reslut.data)
+      case 'alert':
+        return onAlert(reslut.data)
     }
   }
   socket.onclose = () => {
@@ -33,6 +36,7 @@ export function initSocket({ onMsg, onFinish, onError, onClose }: SocketOption) 
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
+      uuid,
       msgType: 'auth',
       token: authStore.token,
     }))

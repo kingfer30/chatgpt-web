@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch } from 'vue'
 import { NButton, NLayoutSider } from 'naive-ui'
+import { v4 as uuidv4 } from 'uuid'
 import Token from '../Token.vue'
 import List from './List.vue'
 import Footer from './Footer.vue'
@@ -19,7 +20,7 @@ const showTokenSetting = ref(false)
 const collapsed = computed(() => appStore.siderCollapsed)
 
 function handleAdd() {
-  chatStore.addHistory({ title: 'New Chat', uuid: Date.now(), isEdit: false })
+  chatStore.addHistory({ title: 'New Chat', uuid: uuidv4(), isEdit: false })
   if (isMobile.value)
     appStore.setSiderCollapsed(true)
 }
