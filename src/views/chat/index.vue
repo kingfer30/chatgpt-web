@@ -129,7 +129,7 @@ initSocket(uuid, {
         dateTime: new Date().toLocaleString(),
         text: '服务端连接关闭，请刷新页面重试',
         inversion: false,
-        error: false,
+        error: true,
         loading: true,
         conversationOptions: null,
         requestOptions: { prompt: prompt.value, options: { ...options } },
