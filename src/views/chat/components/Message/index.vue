@@ -10,7 +10,7 @@ import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 
 interface Props {
-  currentUsage?: string
+  currentUsage?: string | number
   dateTime?: string
   text?: string
   inversion?: boolean

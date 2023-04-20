@@ -83,6 +83,9 @@ watch(
           <List />
         </div>
 
+        <NButton block dashed @click="$router.push('/shop')">
+          {{ $t('setting.shop') }}
+        </NButton>
         <NButton block dashed @click="show = true">
           {{ $t('store.siderButton') }}
         </NButton>

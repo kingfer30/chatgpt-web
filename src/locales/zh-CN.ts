@@ -74,6 +74,7 @@ export default {
     setToken: 'Token令牌设置',
     setTokenTip: '请输入Token令牌',
     setTokenFreeTip: '免费获取Token令牌',
+    shop: 'Token商店',
   },
   store: {
     siderButton: '提示词商店',

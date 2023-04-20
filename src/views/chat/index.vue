@@ -130,7 +130,7 @@ initSocket(uuid, {
         text: '服务端连接关闭，请刷新页面重试',
         inversion: false,
         error: true,
-        loading: true,
+        loading: false,
         conversationOptions: null,
         requestOptions: { prompt: prompt.value, options: { ...options } },
       },

@@ -74,6 +74,7 @@ export default {
     setToken: 'Token Setting',
     setTokenTip: 'Please enter the Token',
     setTokenFreeTip: 'Get free Token',
+    shop: 'Token Store',
   },
   store: {
     siderButton: 'Prompt Store',

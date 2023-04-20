@@ -1,7 +1,7 @@
 declare namespace Chat {
 
 	interface Chat {
-		currentUsage?: string
+		currentUsage?: string | number
 		dateTime: string
 		text: string
 		inversion?: boolean
