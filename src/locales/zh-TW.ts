@@ -25,8 +25,30 @@ export default {
     success: '操作成功',
     failed: '操作失敗',
     verify: '驗證',
-    unauthorizedTips: '未經授權，請先進行驗證。',
     alert: '警告',
+    unauthorizedTips: '本站僅供學習、娛樂使用，嚴禁發佈或傳播一切違規違法內容，您使用本系統代表您承諾同意以下內容：',
+    systemDesc: `
+    <p class="p-1">1. 本站所售令牌只能在本站調用，其他平臺調用無效，國內可直連無需使用魔法工具</p>
+    <p class="p-1">2. 其他平臺購買的Key無法在本站使用</p>
+    <p class="p-1">3. 請規範使用本站，嚴禁發佈任何違法違規內容，執意發佈均屬個人行為與本站無關</p>
+    <p class="p-1">4. 本站檢測出任何違法違規內容會及時予以警告提示，超過內定次數將封禁聊天室</p>
+    <p class="p-1">5. 您任何聊天內容均在您的瀏覽器（本機）完整保留，本站後臺採用資料加密且僅保留5天，保留目的僅為做上下文對話處理。</p>`,
+    tyTBDesc: `<div class="text-red-500 font-bold">
+    一、打開淘寶，掃描以下二維碼，體驗令牌獲取管道：
+  </div>
+  <p>1、瀏覽店鋪內任意商品，發送暗號“滴滴”即可免費獲得10次對話銅令牌使用</p>
+  <p>2、收藏店鋪內任意商品，發送暗號“滴滴”即可免費獲得20次對話銀令牌使用</p>
+  <p>3、關注店鋪並收藏任意商品，發送暗號“滴滴”即可免費獲得30次對話金令牌使用</p>`,
+    tyGZHDesc: `<div class="text-red-500 font-bold">
+  二、打開微信，掃描以下二維碼，體驗令牌獲取管道：
+</div>
+<p>1、公眾號每日推送的文章裏會發放限量免費10次對話銅令牌</p>
+<p>2、轉發公眾號任意文章到朋友圈、一個微信群並截圖發到公眾號上，即可免費獲得20次對話銀令牌使用</p>
+<p>3、轉發公眾號任意文章到三個群並截圖發到公眾號上、任意文章打賞任意金額，即可免費獲得30次對話金令牌使用</p>`,
+    copperDesc: '铜令牌，共享通道，需排隊，單線處理，速度慢',
+    silverDesc: '银令牌，共享通道，需排隊，並行處理，速度適中',
+    goldDesc: '金令牌，獨享通道，無需排隊，並行處理，速度快',
+    dalleDesc: 'DALLE令牌，繪圖通道',
   },
   chat: {
     newChatButton: '新建對話',
@@ -70,11 +92,17 @@ export default {
     timeout: '逾時',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'Token令牌余額',
     setToken: 'Token令牌設定',
     setTokenTip: '請輸入Token令牌',
     setTokenFreeTip: '免費獲取Token令牌',
-    shop: 'Token商城',
+    shop: '購買Token',
+    key_type: '計費類型',
+    key_level: '令牌類型',
+    key_total: '總量',
+    key_used: '已用',
+    key_balance: '剩餘',
+    key_last_use: '上次使用',
+    key_expire: '過期時間',
   },
   store: {
     siderButton: '提示詞商店',

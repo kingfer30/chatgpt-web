@@ -25,8 +25,30 @@ export default {
     success: 'Success',
     failed: 'Failed',
     verify: 'Verify',
-    unauthorizedTips: 'Unauthorized, please verify first.',
     alert: 'warn',
+    unauthorizedTips: 'This website is for learning and entertainment purposes only. It is strictly prohibited to publish or disseminate any illegal content. By using this system, you promise to agree to the following content：',
+    systemDesc: `
+    <p class="p-1">1. The tokens sold on this site can only be called on this site, and calls from other platforms are invalid. Domestic tokens can be directly connected without the use of magic tools</p>
+    <p class="p-1">2. Keys purchased from other platforms cannot be used on this website</p>
+    <p class="p-1">3. Please standardize the use of this website. It is strictly prohibited to publish any illegal or irregular content. Perseverance in publishing is personal behavior and has nothing to do with this website</p>
+    <p class="p-1">4. Any illegal or irregular content detected on this website will be promptly warned and prompted, and chat rooms will be banned if the number of times exceeds the specified limit</p>
+    <p class="p-1">5. Any chat content you have will be fully preserved in your browser (local machine). The backend of this website adopts data encryption and is only retained for 5 days. The purpose of retention is only for contextual conversation processing。</p>`,
+    tyTBDesc: `<div class="text-red-500 font-bold">
+    一、Open Taobao, scan the following QR code, and experience how to obtain tokens：
+  </div>
+  <p>1、Browse any product in the store and send the secret code "Didi" to get 10 free conversation copper tokens to use</p>
+  <p>2、Collect any product in the store and send the secret code "Didi" to receive 20 free conversation silver tokens for use</p>
+  <p>3、Follow the store and collect any products. Send the secret code "Didi" to receive 30 free conversation gold tokens to use</p>`,
+    tyGZHDesc: `<div class="text-red-500 font-bold">
+  二、Open WeChat, scan the following QR code, and experience how to obtain tokens：
+</div>
+<p>1、A limited number of free copper tokens for 10 conversations will be issued in the articles pushed by the official account every day</p>
+<p>2、Forwarding any article on the official account to the circle of friends, a WeChat group, and posting screenshots to the official account, you can get 20 free silver tokens for conversations</p>
+<p>3、Forward any article on the official account to three groups and send screenshots to the official account. Reward any article with any amount, and you can get 30 free conversation gold tokens to use</p>`,
+    copperDesc: 'Copper Token，Shared channel, requires queuing, single line processing, slow speed',
+    silverDesc: 'Silver Token，Shared channel, requires queuing, parallel processing, moderate speed',
+    goldDesc: 'Gold Token，Exclusive channel, no queuing required, parallel processing, fast speed',
+    dalleDesc: 'DALLE Token，Drawing channel',
   },
   chat: {
     newChatButton: 'New Chat',
@@ -70,11 +92,17 @@ export default {
     timeout: 'Timeout',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'Token Balance',
     setToken: 'Token Setting',
     setTokenTip: 'Please enter the Token',
     setTokenFreeTip: 'Get free Token',
-    shop: 'Token Store',
+    shop: 'Token Buy',
+    key_type: 'Charge Type',
+    key_level: 'Token Type',
+    key_total: 'Total',
+    key_used: 'Used',
+    key_balance: 'Balance',
+    key_last_use: 'Last use',
+    key_expire: 'Expire On',
   },
   store: {
     siderButton: 'Prompt Store',

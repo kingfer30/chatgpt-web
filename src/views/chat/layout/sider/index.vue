@@ -58,18 +58,15 @@ watch(
     flush: 'post',
   },
 )
+function jump() {
+  window.open('https://shop.aichat199.com')
+}
 </script>
 
 <template>
   <NLayoutSider
-    :collapsed="collapsed"
-    :collapsed-width="0"
-    :width="260"
-    :show-trigger="isMobile ? false : 'arrow-circle'"
-    collapse-mode="transform"
-    position="absolute"
-    bordered
-    :style="getMobileClass"
+    :collapsed="collapsed" :collapsed-width="0" :width="260" :show-trigger="isMobile ? false : 'arrow-circle'"
+    collapse-mode="transform" position="absolute" bordered :style="getMobileClass"
     @update-collapsed="handleUpdateCollapsed"
   >
     <div class="flex flex-col h-full" :style="mobileSafeArea">
@@ -83,7 +80,7 @@ watch(
           <List />
         </div>
 
-        <NButton block dashed @click="$router.push('/shop')">
+        <NButton block dashed @click="jump">
           {{ $t('setting.shop') }}
         </NButton>
         <NButton block dashed @click="show = true">

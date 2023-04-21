@@ -25,8 +25,30 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
-    unauthorizedTips: '未经授权，请先进行验证。',
     alert: '警告',
+    unauthorizedTips: '本站仅供学习、娱乐使用，严禁发布或传播一切违规违法内容，您使用本系统代表您承诺同意以下内容：',
+    systemDesc: `
+    <p class="p-1">1. 本站所售令牌只能在本站调用，其他平台调用无效，国内可直连无需使用魔法工具</p>
+    <p class="p-1">2. 其他平台购买的Key无法在本站使用</p>
+    <p class="p-1">3. 请规范使用本站，严禁发布任何违法违规内容，执意发布均属个人行为与本站无关</p>
+    <p class="p-1">4. 本站检测出任何违法违规内容会及时予以警告提示，超过内定次数将封禁聊天室</p>
+    <p class="p-1">5. 您任何聊天内容均在您的浏览器(本机)完整保留，本站后台采用数据加密且仅保留5天，保留目的仅为做上下文对话处理。</p>`,
+    tyTBDesc: `<div class="text-red-500 font-bold">
+    一、打开淘宝，扫描以下二维码，体验令牌获取方式：
+  </div>
+  <p>1、浏览店铺内任意商品，发送暗号“滴滴”即可免费获得10次对话铜令牌使用</p>
+  <p>2、收藏店铺内任意商品，发送暗号“滴滴”即可免费获得20次对话银令牌使用</p>
+  <p>3、关注店铺并收藏任意商品，发送暗号“滴滴”即可免费获得30次对话金令牌使用</p>`,
+    tyGZHDesc: `<div class="text-red-500 font-bold">
+  二、打开微信，扫描以下二维码，体验令牌获取方式：
+</div>
+<p>1、公众号每日推送的文章里会发放限量免费10次对话铜令牌</p>
+<p>2、转发公众号任意文章到朋友圈、一个微信群并截图发到公众号上，即可免费获得20次对话银令牌使用</p>
+<p>3、转发公众号任意文章到三个群并截图发到公众号上、任意文章打赏任意金额，即可免费获得30次对话金令牌使用</p>`,
+    copperDesc: '铜令牌，共享通道，需排队，单线处理，速度慢，内含￥30元使用量',
+    silverDesc: '银令牌，共享通道，需排队，并行处理，速度适中，内含￥60元使用量',
+    goldDesc: '金令牌，独享通道，无需排队，并行处理，速度快，内含￥120元使用量',
+    dalleDesc: 'DALLE令牌，绘图通道',
   },
   chat: {
     newChatButton: '新建聊天',
@@ -70,11 +92,22 @@ export default {
     timeout: '超时',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'Token令牌余额',
     setToken: 'Token令牌设置',
     setTokenTip: '请输入Token令牌',
     setTokenFreeTip: '免费获取Token令牌',
-    shop: 'Token商店',
+    shop: '购买Token',
+    key_type: '计费类型',
+    key_type_1: '按容量',
+    key_type_2: '按次数',
+    key_level: '令牌类型',
+    key_level_copper: '铜令牌',
+    key_level_silver: '银令牌',
+    key_level_gold: '金令牌',
+    key_total: '总量',
+    key_used: '已用',
+    key_balance: '剩余',
+    key_last_use: '上次使用',
+    key_expire: '过期时间',
   },
   store: {
     siderButton: '提示词商店',

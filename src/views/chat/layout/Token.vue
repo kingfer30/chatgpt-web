@@ -1,8 +1,13 @@
 <script setup lang='ts'>
 import { computed, ref } from 'vue'
-import { NButton, NInput, NModal, NSpace, useMessage } from 'naive-ui'
+import { NAvatar, NButton, NDivider, NImage, NInput, NModal, NSpace, useMessage } from 'naive-ui'
 import { useAuthStore } from '@/store'
 import Icon403 from '@/icons/403.vue'
+import copperImg from '@/assets/copper.png'
+import silverImg from '@/assets/silver.png'
+import goldImg from '@/assets/gold.png'
+import tbImg from '@/assets/store.jpg'
+import gzhImg from '@/assets/gzh.jpg'
 
 interface Props {
   visible: boolean
@@ -52,17 +57,31 @@ function handlePress(event: KeyboardEvent) {
 </script>
 
 <template>
-  <NModal :show="visible" style="width: 90%; max-width: 640px" :closable="true">
+  <NModal :show="visible" style="width: 90%; max-width: 880px" :closable="true">
     <div class="p-10 bg-white rounded dark:bg-slate-800">
       <div class="space-y-4">
         <header class="space-y-2">
           <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-neutral-200">
-            403
+            {{ $t('setting.setToken') }}
           </h2>
-          <p class="text-base text-center text-slate-500 dark:text-slate-500">
+          <Icon403 class="w-[200px] m-auto" />
+          <p class="text-sm font-bold text-center  text-red-500">
             {{ $t('common.unauthorizedTips') }}
           </p>
-          <Icon403 class="w-[200px] m-auto" />
+          <NDivider />
+          <div class="text-sm text-red-500">
+            <div v-html="$t('common.systemDesc')" />
+          </div>
+          <NDivider />
+          <p class="text-xs flex">
+            <NAvatar color="#fff" :size="15" :src="copperImg" object-fit="contain" />{{ $t('common.copperDesc') }}
+          </p>
+          <p class="text-xs flex ">
+            <NAvatar color="#fff" :size="15" :src="silverImg" object-fit="contain" />{{ $t('common.silverDesc') }}
+          </p>
+          <p class="text-xs flex">
+            <NAvatar color="#fff" :size="15" :src="goldImg" object-fit="contain" />{{ $t('common.goldDesc') }}
+          </p>
         </header>
         <NInput v-model:value="token" type="password" placeholder="请输入Token令牌" @keypress="handlePress" />
         <NSpace justify="center">
@@ -76,13 +95,15 @@ function handlePress(event: KeyboardEvent) {
       </div>
     </div>
   </NModal>
-  <NModal :show="showImg" @update:show="showImg = false">
+  <NModal :show="showImg" style="width: 90%; max-width: 730px" @update:show="showImg = false">
     <div class="p-10 bg-white rounded dark:bg-slate-800">
+      <div v-html="$t('common.tyTBDesc')" />
       <div class="flex justify-center">
-        <img src="@/assets/store.jpg" class="w-48">
+        <NImage width="120" :src="tbImg" alt="淘宝二维码" />
       </div>
-      <div class="text-red-500">
-        扫描二维码，关注TB店铺后，回复"滴滴"即可~
+      <div v-html="$t('common.tyGZHDesc')" />
+      <div class="flex justify-center">
+        <NImage width="120" :src="gzhImg" alt="微信公众号二维码" />
       </div>
     </div>
   </NModal>
