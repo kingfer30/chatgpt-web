@@ -80,9 +80,6 @@ function jump() {
           <List />
         </div>
 
-        <NButton block dashed @click="jump">
-          {{ $t('setting.shop') }}
-        </NButton>
         <NButton block dashed @click="show = true">
           {{ $t('store.siderButton') }}
         </NButton>

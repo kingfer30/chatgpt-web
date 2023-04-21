@@ -176,8 +176,8 @@ function handleSubmit() {
   onConversation()
 }
 
-async function onConversation() {
-  const message = prompt.value
+async function onConversation(msg = '') {
+  const message = msg || prompt.value
 
   if (loading.value)
     return
@@ -280,73 +280,11 @@ async function onRegenerate(index: number) {
   if (loading.value)
     return
 
-  controller = new AbortController()
-
   const { requestOptions } = dataSources.value[index]
 
   const message = requestOptions?.prompt ?? ''
 
-  let options: Chat.ConversationRequest = {}
-
-  if (requestOptions.options)
-    options = { ...requestOptions.options }
-
-  loading.value = true
-
-  updateChat(
-    uuid,
-    index,
-    {
-      dateTime: new Date().toLocaleString(),
-      text: '',
-      inversion: false,
-      error: false,
-      loading: true,
-      conversationOptions: null,
-      requestOptions: { prompt: message, options: { ...options } },
-    },
-  )
-
-  try {
-    const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
-        prompt: message,
-        options,
-        signal: controller.signal,
-      })
-    }
-    await fetchChatAPIOnce()
-  }
-  catch (error: any) {
-    if (error.message === 'canceled') {
-      updateChatSome(
-        uuid,
-        index,
-        {
-          loading: false,
-        },
-      )
-      return
-    }
-
-    const errorMessage = error?.message ?? t('common.wrong')
-    updateChat(
-      uuid,
-      index,
-      {
-        dateTime: new Date().toLocaleString(),
-        text: errorMessage,
-        inversion: false,
-        error: true,
-        loading: false,
-        conversationOptions: null,
-        requestOptions: { prompt: message, options: { ...options } },
-      },
-    )
-  }
-  finally {
-    loading.value = false
-  }
+  onConversation(message)
 }
 
 function handleExport() {

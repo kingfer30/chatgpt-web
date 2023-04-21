@@ -41,7 +41,7 @@ const getContainerClass = computed(() => {
         <Sider />
         <NLayoutHeader>
           <NAlert title="通知" type="info">
-            系统首发，即日起至4月15日，赠送15分钟免费对讲
+            设置Token令牌后即可体验，扫描二维码即可获取免费体验令牌
           </NAlert>
         </NLayoutHeader>
         <NLayoutContent class="h-full">
