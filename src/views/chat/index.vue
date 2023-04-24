@@ -121,22 +121,35 @@ initSocket(uuid, {
   },
   onClose: (data) => {
     window.console.log(data)
-    updateChat(
+    updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
+    addChat(
       uuid,
-      dataSources.value.length - 1,
       {
-        currentUsage: '0',
+        currentUsage: '',
         dateTime: new Date().toLocaleString(),
         text: '服务端连接关闭，请刷新页面重试',
         inversion: false,
         error: true,
-        loading: false,
         conversationOptions: null,
-        requestOptions: { prompt: prompt.value, options: { ...options } },
+        requestOptions: { prompt: '服务端连接关闭，请刷新页面重试', options: null },
       },
     )
+    // updateChat(
+    //   uuid,
+    //   dataSources.value.length - 1,
+    //   {
+    //     currentUsage: '0',
+    //     dateTime: new Date().toLocaleString(),
+    //     text: '服务端连接关闭，请刷新页面重试',
+    //     inversion: false,
+    //     error: true,
+    //     loading: false,
+    //     conversationOptions: null,
+    //     requestOptions: { prompt: prompt.value, options: { ...options } },
+    //   },
+    // )
+    // updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
     scrollToBottomIfAtBottom()
-    updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
   },
   onAlert: (data) => {
     dialog.warning({
