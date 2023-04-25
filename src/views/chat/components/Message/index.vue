@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { NDropdown } from 'naive-ui'
 import AvatarComponent from './Avatar.vue'
 import TextComponent from './Text.vue'
@@ -11,11 +11,13 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 
 interface Props {
   currentUsage?: string | number
+  createTime?: string
   dateTime?: string
   text?: string
   inversion?: boolean
   error?: boolean
   loading?: boolean
+  showDate?: string
 }
 
 interface Emit {
@@ -36,6 +38,29 @@ const textRef = ref<HTMLElement>()
 const asRawText = ref(props.inversion)
 
 const messageRef = ref<HTMLElement>()
+
+let dateDiff = getDiff()
+watch(
+  () => props.dateTime,
+  (time) => {
+    if (time)
+      dateDiff = getDiff()
+  },
+)
+function getDiff() {
+  // 定义开始时间和结束时间
+  const startTime = new Date(props.createTime || '')
+  const endTime = new Date(props.dateTime || '')
+  if (!isNaN(startTime.getTime()) && !isNaN(endTime.getTime())) {
+    // 计算时间差（单位：毫秒）
+    const timeDiff = endTime.getTime() - startTime.getTime()
+    // 将时间差转换为秒和毫秒数
+    const seconds = Math.floor(timeDiff / 1000)
+    const milliseconds = timeDiff % 1000
+    return ` - ${seconds}.${milliseconds}s`
+  }
+  return ''
+}
 
 const options = computed(() => {
   const common = [
@@ -94,7 +119,7 @@ function handleRegenerate() {
     </div>
     <div class="overflow-hidden text-sm " :class="[inversion ? 'items-end' : 'items-start']">
       <div class="text-xs text-[#b4bbc4] flex justify-between" :class="[inversion ? 'text-right' : 'text-left']">
-        <div>{{ dateTime }}</div>
+        <div>{{ createTime }}{{ !inversion ? dateDiff : '' }}</div>
         <div class="text-red-600">
           {{ currentUsage }}
         </div>

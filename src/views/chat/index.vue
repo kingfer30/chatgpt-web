@@ -51,6 +51,8 @@ const { promptList: promptTemplate } = storeToRefs<any>(promptStore)
 
 let lastText = ''
 
+let createTime = ''
+
 let options: Chat.ConversationRequest = {}
 
 initSocket(uuid, {
@@ -61,6 +63,7 @@ initSocket(uuid, {
         uuid,
         dataSources.value.length - 1,
         {
+          createTime,
           currentUsage: usage,
           dateTime: new Date().toLocaleString(),
           text: lastText + (text ?? ''),
@@ -102,6 +105,7 @@ initSocket(uuid, {
       uuid,
       dataSources.value.length - 1,
       {
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: msg,
         inversion: false,
@@ -122,10 +126,12 @@ initSocket(uuid, {
   onClose: (data) => {
     window.console.log(data)
     updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
+    createTime = new Date().toLocaleString()
     addChat(
       uuid,
       {
         currentUsage: '',
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: '服务端连接关闭，请刷新页面重试',
         inversion: false,
@@ -134,21 +140,6 @@ initSocket(uuid, {
         requestOptions: { prompt: '服务端连接关闭，请刷新页面重试', options: null },
       },
     )
-    // updateChat(
-    //   uuid,
-    //   dataSources.value.length - 1,
-    //   {
-    //     currentUsage: '0',
-    //     dateTime: new Date().toLocaleString(),
-    //     text: '服务端连接关闭，请刷新页面重试',
-    //     inversion: false,
-    //     error: true,
-    //     loading: false,
-    //     conversationOptions: null,
-    //     requestOptions: { prompt: prompt.value, options: { ...options } },
-    //   },
-    // )
-    // updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
     scrollToBottomIfAtBottom()
   },
   onAlert: (data) => {
@@ -199,11 +190,12 @@ async function onConversation(msg = '') {
     return
 
   controller = new AbortController()
-
+  createTime = new Date().toLocaleString()
   addChat(
     uuid,
     {
       currentUsage: '',
+      createTime,
       dateTime: new Date().toLocaleString(),
       text: message,
       inversion: true,
@@ -222,9 +214,11 @@ async function onConversation(msg = '') {
   if (lastContext && usingContext.value)
     options = { ...lastContext }
 
+  createTime = new Date().toLocaleString()
   addChat(
     uuid,
     {
+      createTime,
       dateTime: new Date().toLocaleString(),
       text: '',
       loading: true,
@@ -273,6 +267,7 @@ async function onConversation(msg = '') {
       uuid,
       dataSources.value.length - 1,
       {
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: errorMessage,
         inversion: false,
@@ -470,7 +465,7 @@ onUnmounted(() => {
           <template v-else>
             <div>
               <Message
-                v-for="(item, index) of dataSources" :key="index" :date-time="item.dateTime" :text="item.text"
+                v-for="(item, index) of dataSources" :key="index" :date-time="item.dateTime" :create-time="item.createTime" :text="item.text"
                 :current-usage="item.currentUsage" :inversion="item.inversion" :error="item.error" :loading="item.loading"
                 @regenerate="onRegenerate(index)" @delete="handleDelete(index)"
               />

@@ -36,18 +36,18 @@ export default {
     tyTBDesc: `<div class="text-red-500 font-bold">
     一、Open Taobao, scan the following QR code, and experience how to obtain tokens：
   </div>
-  <p>1、Browse any product in the store and send the secret code "Didi" to get 10 free conversation copper tokens to use</p>
+  <p>1、Browse any product in the store and send the secret code "Didi" to get 30 free conversation copper tokens to use</p>
   <p>2、Collect any product in the store and send the secret code "Didi" to receive 20 free conversation silver tokens for use</p>
-  <p>3、Follow the store and collect any products. Send the secret code "Didi" to receive 30 free conversation gold tokens to use</p>`,
+  <p>3、Follow the store and collect any products. Send the secret code "Didi" to receive 10 free conversation gold tokens to use</p>`,
     tyGZHDesc: `<div class="text-red-500 font-bold">
   二、Open WeChat, scan the following QR code, and experience how to obtain tokens：
 </div>
-<p>1、A limited number of free copper tokens for 10 conversations will be issued in the articles pushed by the official account every day</p>
+<p>1、A limited number of free copper tokens for 30 conversations will be issued in the articles pushed by the official account every day</p>
 <p>2、Forwarding any article on the official account to the circle of friends, a WeChat group, and posting screenshots to the official account, you can get 20 free silver tokens for conversations</p>
-<p>3、Forward any article on the official account to three groups and send screenshots to the official account. Reward any article with any amount, and you can get 30 free conversation gold tokens to use</p>`,
-    copperDesc: 'Copper Token，Shared channel, requires queuing, single line processing, slow speed',
-    silverDesc: 'Silver Token，Shared channel, requires queuing, parallel processing, moderate speed',
-    goldDesc: 'Gold Token，Exclusive channel, no queuing required, parallel processing, fast speed',
+<p>3、Forward any article on the official account to three groups and send screenshots to the official account. Reward any article with any amount, and you can get 10 free conversation gold tokens to use</p>`,
+    copperDesc: 'Copper Token，Shared channel, requires queuing, single line processing, slow speed, Average response time 7-10 seconds',
+    silverDesc: 'Silver Token，Shared channel, requires queuing, parallel processing, moderate speed, Average response time 3-6 seconds',
+    goldDesc: 'Gold Token，Exclusive channel, no queuing required, parallel processing, fast speed,Average response time 1-2 seconds',
     dalleDesc: 'DALLE Token，Drawing channel',
   },
   chat: {
@@ -77,7 +77,7 @@ export default {
   setting: {
     setting: 'Setting',
     general: 'General',
-    advanced: 'Advanced',
+    concat: 'Concat Us',
     config: 'Config',
     avatarLink: 'Avatar Link',
     name: 'Name',

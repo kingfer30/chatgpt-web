@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { NModal, NTabPane, NTabs } from 'naive-ui'
 import General from './General.vue'
-// import Advanced from './Advanced.vue'
+import Concat from './Concat.vue'
 import About from './About.vue'
 import { SvgIcon } from '@/components/common'
 
@@ -43,21 +43,21 @@ const show = computed({
             <General />
           </div>
         </NTabPane>
-        <!-- <NTabPane name="Advanced" tab="Advanced">
-          <template #tab>
-            <SvgIcon class="text-lg" icon="ri:equalizer-line" />
-            <span class="ml-2">{{ $t('setting.advanced') }}</span>
-          </template>
-          <div class="min-h-[100px]">
-            <Advanced />
-          </div>
-        </NTabPane> -->
         <NTabPane name="Config" tab="Config">
           <template #tab>
             <SvgIcon class="text-lg" icon="ri:list-settings-line" />
             <span class="ml-2">{{ $t('setting.config') }}</span>
           </template>
           <About />
+        </NTabPane>
+        <NTabPane name="Concat" tab="Concat">
+          <template #tab>
+            <SvgIcon class="text-lg" icon="ri:equalizer-line" />
+            <span class="ml-2">{{ $t('setting.concat') }}</span>
+          </template>
+          <div class="min-h-[100px]">
+            <Concat />
+          </div>
         </NTabPane>
       </NTabs>
     </div>

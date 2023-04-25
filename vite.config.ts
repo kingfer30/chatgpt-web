@@ -50,7 +50,7 @@ export default defineConfig((env) => {
         ignoreTryCatch: false,
       },
       assetsDir: 'static/', // 指定生成静态资源的存放路径
-      // minify: 'terser', // 混淆器，terser构建后文件体积更小
+      minify: 'terser', // 混淆器，terser构建后文件体积更小
     },
   }
 })
