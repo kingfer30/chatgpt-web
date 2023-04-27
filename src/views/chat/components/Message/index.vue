@@ -119,7 +119,7 @@ function handleRegenerate() {
     </div>
     <div class="overflow-hidden text-sm " :class="[inversion ? 'items-end' : 'items-start']">
       <div class="text-xs text-[#b4bbc4] flex justify-between" :class="[inversion ? 'text-right' : 'text-left']">
-        <div>{{ createTime }}{{ !inversion ? dateDiff : '' }}</div>
+        <div>{{ !inversion ? createTime : dateTime }}{{ !inversion ? dateDiff : '' }}</div>
         <div class="text-red-600">
           {{ currentUsage }}
         </div>
