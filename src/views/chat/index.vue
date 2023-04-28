@@ -58,9 +58,6 @@ let options: Chat.ConversationRequest = {}
 initSocket(uuid, {
   onMsg: (data) => {
     const { text, usage, conversationId, parentMessageId } = data
-    if (createTime === '')
-      createTime = new Date().toLocaleString()
-
     try {
       updateChat(
         uuid,
@@ -108,7 +105,7 @@ initSocket(uuid, {
       uuid,
       dataSources.value.length - 1,
       {
-        createTime: new Date().toLocaleString(),
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: msg,
         inversion: false,
@@ -129,11 +126,12 @@ initSocket(uuid, {
   onClose: (data) => {
     window.console.log(data)
     updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
+    createTime = new Date().toLocaleString()
     addChat(
       uuid,
       {
         currentUsage: '',
-        createTime: new Date().toLocaleString(),
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: '服务端连接关闭，请刷新页面重试',
         inversion: false,
@@ -192,6 +190,7 @@ async function onConversation(msg = '') {
     return
 
   controller = new AbortController()
+  createTime = new Date().toLocaleString()
   addChat(
     uuid,
     {
@@ -215,6 +214,7 @@ async function onConversation(msg = '') {
   if (lastContext && usingContext.value)
     options = { ...lastContext }
 
+  createTime = new Date().toLocaleString()
   addChat(
     uuid,
     {
@@ -267,7 +267,7 @@ async function onConversation(msg = '') {
       uuid,
       dataSources.value.length - 1,
       {
-        createTime: new Date().toLocaleString(),
+        createTime,
         dateTime: new Date().toLocaleString(),
         text: errorMessage,
         inversion: false,
