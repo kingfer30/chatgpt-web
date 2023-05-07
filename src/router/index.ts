@@ -18,6 +18,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/query/',
+    name: 'Key',
+    component: () => import('@/views/query/index.vue'),
+  },
+  {
     path: '/404',
     name: '404',
     component: () => import('@/views/exception/404/index.vue'),

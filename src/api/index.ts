@@ -46,3 +46,10 @@ export function fetchVerify<T>(token: string) {
     data: { token },
   })
 }
+
+export function fetchKeyDetail<T = any>(key: string) {
+  return post<T>({
+    url: '/key-query',
+    data: { key },
+  })
+}

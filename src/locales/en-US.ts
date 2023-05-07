@@ -103,6 +103,7 @@ export default {
     key_balance: 'Balance',
     key_last_use: 'Last use',
     key_expire: 'Expire On',
+    key_query: 'APi Key Query',
   },
   store: {
     siderButton: 'Prompt Store',

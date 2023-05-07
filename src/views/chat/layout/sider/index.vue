@@ -58,8 +58,11 @@ watch(
     flush: 'post',
   },
 )
-function jump() {
+function jumpShop() {
   window.open('https://shop.aichat199.com')
+}
+function jumpQuery() {
+  window.open('/#/query/')
 }
 </script>
 
@@ -80,15 +83,18 @@ function jump() {
           <List />
         </div>
 
-        <NButton block dashed @click="jump">
+        <NButton block @click="jumpQuery">
+          {{ $t('setting.key_query') }}
+        </NButton>
+        <NButton block color="#ff5758" @click="jumpShop">
           {{ $t('setting.shop') }}
         </NButton>
         <NButton block dashed @click="show = true">
           {{ $t('store.siderButton') }}
         </NButton>
-        <NButton block dashed @click="showTokenSetting = true">
+        <!-- <NButton block dashed @click="showTokenSetting = true">
           {{ $t('setting.setToken') }}
-        </NButton>
+        </NButton> -->
       </main>
       <Footer />
     </div>

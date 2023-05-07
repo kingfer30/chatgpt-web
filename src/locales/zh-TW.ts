@@ -103,6 +103,7 @@ export default {
     key_balance: '剩餘',
     key_last_use: '上次使用',
     key_expire: '過期時間',
+    key_query: 'APi Key 查詢',
   },
   store: {
     siderButton: '提示詞商店',
