@@ -1,10 +1,9 @@
 <script setup lang='ts'>
 import { h, ref } from 'vue'
 import { NButton, NDataTable, NInput, NSpin, NTag } from 'naive-ui'
-import type { DataTableColumns } from 'naive-ui'
 import { fetchKeyDetail } from '@/api'
 
-const tableColumns = ref<DataTableColumns>([
+const tableColumns: any = [
   {
     title: 'Key',
     key: 'token',
@@ -143,7 +142,7 @@ const tableColumns = ref<DataTableColumns>([
         : row.expire
     },
   },
-])
+]
 
 const tableData = ref<any>([])
 
@@ -163,8 +162,8 @@ function search() {
   const list = keyword.value.trim().split('\n')
   const error_key: number[] = []
   tableData.value.splice(0)
-  tableColumns.value[1].colSpan = undefined
-  tableColumns.value[1].cellProps = undefined
+  tableColumns[1].colSpan = undefined
+  tableColumns[1].cellProps = undefined
 
   list.forEach((token) => {
     token = token.trim()
@@ -188,8 +187,8 @@ function search() {
       }
       error_key.push(index)
     }).then(() => {
-      tableColumns.value[1].colSpan = (rowData: any, rowIndex: any) => (error_key.includes(rowIndex) ? 5 : 1)
-      tableColumns.value[1].cellProps = (rowData: any, rowIndex: any) => (error_key.includes(rowIndex) ? { style: 'color:red' } : {})
+      tableColumns[1].colSpan = (rowData: any, rowIndex: any) => (error_key.includes(rowIndex) ? 5 : 1)
+      tableColumns[1].cellProps = (rowData: any, rowIndex: any) => (error_key.includes(rowIndex) ? { style: 'color:red' } : {})
     })
   })
 }
