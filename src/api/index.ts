@@ -53,3 +53,8 @@ export function fetchKeyDetail<T = any>(key: string) {
     data: { key },
   })
 }
+export function fetchAbout<T = any>() {
+  return post<T>({
+    url: '/about',
+  })
+}

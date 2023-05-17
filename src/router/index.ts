@@ -18,6 +18,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/about/',
+    name: 'About',
+    component: () => import('@/views/about/index.vue'),
+  },
+  {
     path: '/query/',
     name: 'Key',
     component: () => import('@/views/query/index.vue'),

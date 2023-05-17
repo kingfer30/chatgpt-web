@@ -42,6 +42,8 @@ const conversationList = computed(() => dataSources.value.filter(item => (!item.
 const prompt = ref<string>('')
 const loading = ref<boolean>(false)
 const inputRef = ref<Ref | null>(null)
+authStore.setToken('AITK-h897xI7i1c4AabmjLT9AF4XBeE2jzeLsmUo5k2X8DP9L393V')
+authStore.setAuth(true)
 
 // 添加PromptStore
 const promptStore = usePromptStore()

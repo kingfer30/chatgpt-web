@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { h, ref } from 'vue'
-import { NButton, NDataTable, NInput, NSpin, NTag } from 'naive-ui'
+import { NButton, NDataTable, NInput, NSpace, NSpin, NTag } from 'naive-ui'
 import { fetchKeyDetail } from '@/api'
 
 const tableColumns: any = [
@@ -175,6 +175,8 @@ function search() {
       })
     }
   })
+  // 清空输入
+  keyword.value = ''
   tableData.value.forEach((row: any, index: number) => {
     getKeyDetail(row.key).then((resp) => {
       const { data } = resp
@@ -199,17 +201,32 @@ async function getKeyDetail(key: string) {
 </script>
 
 <template>
-  <div class="container mx-auto flex justify-between mt-8">
-    <NInput
-      v-model:value="keyword" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
-      :autosize="{ minRows: 1 }"
-    />
-    <NButton type="primary" @click="search">
-      查询
-    </NButton>
-  </div>
-  <div class="container mx-auto flex justify-between my-8">
-    <NDataTable :columns="tableColumns" :data="tableData" :single-line="false" striped />
+  <div class="container mx-auto mt-8">
+    <div>
+      <NSpace>
+        <NTag type="success">
+          <a href="/" target="_blank">限时免费公益站</a>
+        </NTag>
+        <NTag type="error">
+          <a href="https://shop.aichat199.com" target="_blank">购物商城</a>
+        </NTag>
+        <NTag type="info">
+          <a href="/#/about" target="_blank">购买须知</a>
+        </NTag>
+      </NSpace>
+    </div>
+    <div class="flex justify-between mt-1">
+      <NInput
+        v-model:value="keyword" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
+        :autosize="{ minRows: 1 }"
+      />
+      <NButton type="primary" @click="search">
+        查询
+      </NButton>
+    </div>
+    <div class="container mx-auto flex justify-between my-8">
+      <NDataTable :columns="tableColumns" :data="tableData" :single-line="false" striped />
+    </div>
   </div>
 </template>
 

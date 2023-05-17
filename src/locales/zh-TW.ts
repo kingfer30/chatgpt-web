@@ -95,7 +95,7 @@ export default {
     setToken: 'Token令牌設定',
     setTokenTip: '請輸入Token令牌',
     setTokenFreeTip: '免費獲取Token令牌',
-    shop: '購買Token',
+    shop: '購買Token & API Key',
     key_type: '計費類型',
     key_level: '令牌類型',
     key_total: '總量',
@@ -104,6 +104,7 @@ export default {
     key_last_use: '上次使用',
     key_expire: '過期時間',
     key_query: 'APi Key 查詢',
+    about: '關於我們',
   },
   store: {
     siderButton: '提示詞商店',

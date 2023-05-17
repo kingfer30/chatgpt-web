@@ -95,7 +95,7 @@ export default {
     setToken: 'Token令牌设置',
     setTokenTip: '请输入Token令牌',
     setTokenFreeTip: '免费获取Token令牌',
-    shop: '购买Token',
+    shop: '购买Token & API Key',
     key_type: '计费类型',
     key_type_1: '按容量',
     key_type_2: '按次数',
@@ -109,6 +109,7 @@ export default {
     key_last_use: '上次使用',
     key_expire: '过期时间',
     key_query: 'APi Key 查询',
+    about: '购买须知',
   },
   store: {
     siderButton: '提示词商店',

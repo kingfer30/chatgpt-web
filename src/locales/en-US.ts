@@ -95,7 +95,7 @@ export default {
     setToken: 'Token Setting',
     setTokenTip: 'Please enter the Token',
     setTokenFreeTip: 'Get free Token',
-    shop: 'Token Buy',
+    shop: 'Token Buy & API Key',
     key_type: 'Charge Type',
     key_level: 'Token Type',
     key_total: 'Total',
@@ -104,6 +104,7 @@ export default {
     key_last_use: 'Last use',
     key_expire: 'Expire On',
     key_query: 'APi Key Query',
+    about: 'About',
   },
   store: {
     siderButton: 'Prompt Store',

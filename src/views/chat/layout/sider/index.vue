@@ -64,6 +64,9 @@ function jumpShop() {
 function jumpQuery() {
   window.open('/#/query/')
 }
+// function jumpAbout() {
+//   window.open('/#/about/')
+// }
 </script>
 
 <template>
@@ -83,15 +86,18 @@ function jumpQuery() {
           <List />
         </div>
 
-        <NButton block @click="jumpQuery">
+        <NButton block secondary type="success" @click="jumpQuery">
           {{ $t('setting.key_query') }}
         </NButton>
-        <NButton block color="#ff5758" @click="jumpShop">
+        <NButton block secondary type="error" @click="jumpShop">
           {{ $t('setting.shop') }}
         </NButton>
-        <NButton block dashed @click="show = true">
+        <NButton block secondary type="info" @click="show = true">
           {{ $t('store.siderButton') }}
         </NButton>
+        <!-- <NButton block secondary type="info" @click="jumpAbout">
+          {{ $t('setting.about') }}
+        </NButton> -->
         <!-- <NButton block dashed @click="showTokenSetting = true">
           {{ $t('setting.setToken') }}
         </NButton> -->
