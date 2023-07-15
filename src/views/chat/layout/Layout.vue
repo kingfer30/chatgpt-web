@@ -40,8 +40,8 @@ const getContainerClass = computed(() => {
       <NLayout class="z-40 transition" :class="getContainerClass" has-sider>
         <Sider />
         <NLayoutHeader>
-          <NAlert title="通知" type="info">
-            金令牌限时免费使用中...
+          <NAlert title="通知" type="warning">
+            本站将于近期全新升级, 敬请期待...
           </NAlert>
         </NLayoutHeader>
         <NLayoutContent class="h-full">

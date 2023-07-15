@@ -47,9 +47,15 @@ export function fetchVerify<T>(token: string) {
   })
 }
 
-export function fetchKeyDetail<T = any>(key: string) {
+export function fetchKeyOffical<T = any>(key: string) {
   return post<T>({
-    url: '/key-query',
+    url: '/offical-key-query',
+    data: { key },
+  })
+}
+export function fetchKeyThird<T = any>(key: string) {
+  return post<T>({
+    url: '/third-key-query',
     data: { key },
   })
 }

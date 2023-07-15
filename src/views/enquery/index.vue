@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { h, ref } from 'vue'
 import { NButton, NCard, NDataTable, NInput, NProgress, NSpace, NSpin, NTabPane, NTabs, NTag } from 'naive-ui'
-import { fetchKeyOffical, fetchKeyThird } from '@/api'
+import { fetchKeyDetail } from '@/api'
 
 const tableColumns: any = [
   {
@@ -10,6 +10,7 @@ const tableColumns: any = [
     width: '350px',
     render(row: any) {
       const tags = []
+      window.console.log(row)
       tags.push(h(
         NTag,
         {
@@ -224,7 +225,7 @@ function searchOffical() {
   // 清空输入
   keywordOffical.value = ''
   tableDataOffical.value.forEach((row: any, index: number) => {
-    getKeyOffical(row.key).then((resp) => {
+    getKeyDetail(row.key).then((resp) => {
       const { data } = resp
       data.key = row.key
       data.token = row.token
@@ -261,7 +262,7 @@ function searchThird() {
   // 清空输入
   keywordThird.value = ''
   tableDataThird.value.forEach((row: any, index: number) => {
-    getKeyThird(row.key).then((resp) => {
+    getKeyDetail(row.key).then((resp) => {
       const { data } = resp
       data.key = row.key
       data.token = row.token
@@ -278,11 +279,8 @@ function searchThird() {
   })
 }
 
-async function getKeyOffical(key: string) {
-  return await fetchKeyOffical<KeyState>(key)
-}
-async function getKeyThird(key: string) {
-  return await fetchKeyThird<KeyState>(key)
+async function getKeyDetail(key: string) {
+  return await fetchKeyDetail<KeyState>(key)
 }
 </script>
 
@@ -301,13 +299,12 @@ async function getKeyThird(key: string) {
         </NTag>
       </NSpace>
     </div>
-    <NCard title="额度查询" style="margin-bottom: 16px">
+    <NCard title="Usage Query" style="margin-bottom: 16px">
       <NTabs type="line" animated>
         <NTabPane name="oasis" tab="OpenAI Keys">
           <div class="flex justify-between mt-1" style="width: 90%;">
             <NInput
-              v-model:value="keywordOffical"
-              type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
+              v-model:value="keywordOffical" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
               :autosize="{ minRows: 1 }"
             />
             <NButton type="primary" @click="searchOffical">
