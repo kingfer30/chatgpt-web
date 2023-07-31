@@ -1,8 +1,9 @@
 <script setup lang='ts'>
 import { h, ref } from 'vue'
-import { NButton, NCard, NDataTable, NInput, NProgress, NSpace, NSpin, NTabPane, NTabs, NTag } from 'naive-ui'
+import { NAlert, NButton, NCard, NDataTable, NInput, NProgress, NSpin, NTabPane, NTabs, NTag } from 'naive-ui'
 import { fetchKeyOffical, fetchKeyThird } from '@/api'
 
+let tabValue = 'OpenAI'
 const tableColumns: any = [
   {
     title: 'Key',
@@ -47,19 +48,6 @@ const tableColumns: any = [
           default: () => row.gpt4 === true ? (`gpt4${row.gpt4k ? `-${row.gpt4k}` : ''}`) : 'gpt3.5',
         },
       ))
-      tags.push(h(
-        NTag,
-        {
-          style: {
-            margin: '0 6px',
-          },
-          type: row.bindka === true ? 'primary' : 'default',
-          bordered: false,
-        },
-        {
-          default: () => row.bindka === true ? '已绑卡' : '未绑卡',
-        },
-      ))
       return h('div', null, [
         row.token,
         row.total === -1
@@ -101,7 +89,8 @@ const tableColumns: any = [
             default: () => '',
           },
         )
-        : row.used
+        : (tabValue === 'OpenAI' ? '需要登录' : row.used)
+      // : row.used
     },
   },
   {
@@ -120,7 +109,8 @@ const tableColumns: any = [
             default: () => '',
           },
         )
-        : row.balance
+        : (tabValue === 'OpenAI' ? '需要登录' : row.balance)
+      // : row.balance
     },
   },
 
@@ -139,7 +129,6 @@ const tableColumns: any = [
           },
         )
       }
-      window.console.log(row)
       if (row.status === 'error')
         return ''
 
@@ -192,6 +181,7 @@ const tableDataThird = ref<any>([])
 
 const keywordOffical = ref<string>('')
 const keywordThird = ref<string>('')
+
 interface KeyState {
   key?: string
   token?: string
@@ -205,6 +195,7 @@ interface KeyState {
   expire?: string
 }
 function searchOffical() {
+  window.console.log(tabValue)
   const list = keywordOffical.value.trim().split('\n')
   const error_key: number[] = []
   tableDataOffical.value.splice(0)
@@ -242,6 +233,7 @@ function searchOffical() {
 }
 
 function searchThird() {
+  window.console.log(tabValue)
   const list = keywordThird.value.trim().split('\n')
   const error_key: number[] = []
   tableDataThird.value.splice(0)
@@ -284,30 +276,26 @@ async function getKeyOffical(key: string) {
 async function getKeyThird(key: string) {
   return await fetchKeyThird<KeyState>(key)
 }
+function updateTableName(val: string) {
+  tabValue = val
+}
 </script>
 
 <template>
   <div class="container mx-auto mt-8">
-    <div>
-      <NSpace>
-        <NTag type="success">
-          <a href="/" target="_blank">限时免费公益站</a>
-        </NTag>
-        <NTag type="error">
-          <a href="https://shop.aichat199.com" target="_blank">购物商城</a>
-        </NTag>
-        <NTag type="info">
-          <a href="/#/about" target="_blank">购买须知</a>
-        </NTag>
-      </NSpace>
-    </div>
-    <NCard title="额度查询" style="margin-bottom: 16px">
-      <NTabs type="line" animated>
-        <NTabPane name="oasis" tab="OpenAI Keys">
+    <NCard title="API Keys额度查询" style="margin-bottom: 16px">
+      <NAlert title="提示" type="info">
+        <p>· 如果您使用OpenAI官方账号生成的API Key，可以选择"OpenAI Keys"进行查询</p>
+        <p>· 如果您使用果果API生成的API Key，可以选择"果果API Keys"进行查询</p>
+        <p style="color: red;">
+          · [OpenAI Keys] 官方更新规则，现在只能通过登录平台才能获取API使用情况。
+        </p>
+      </NAlert>
+      <NTabs type="line" animated @update:value="updateTableName">
+        <NTabPane name="OpenAI" tab="OpenAI Keys">
           <div class="flex justify-between mt-1" style="width: 90%;">
             <NInput
-              v-model:value="keywordOffical"
-              type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
+              v-model:value="keywordOffical" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
               :autosize="{ minRows: 1 }"
             />
             <NButton type="primary" @click="searchOffical">
@@ -318,7 +306,7 @@ async function getKeyThird(key: string) {
             <NDataTable :columns="tableColumns" :data="tableDataOffical" :single-line="false" striped />
           </div>
         </NTabPane>
-        <NTabPane name="the beatles" tab="果果API Keys">
+        <NTabPane name="GuoGuo" tab="果果API Keys">
           <div class="flex justify-between mt-1" style="width: 90%;">
             <NInput
               v-model:value="keywordThird" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
