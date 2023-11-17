@@ -309,7 +309,7 @@ function updateTableName(val: string) {
         <NTabPane name="GuoGuo" tab="果果API Keys">
           <div class="flex justify-between mt-1" style="width: 90%;">
             <NInput
-              v-model:value="keywordThird" type="textarea" placeholder="请输入key，支持换行多个查询" class="mr-2 min-w-full"
+              v-model:value="keywordThird" type="textarea" placeholder="请输入账号密码, 格式为: 账号----密码，支持换行多个查询" class="mr-2 min-w-full"
               :autosize="{ minRows: 1 }"
             />
             <NButton type="primary" @click="searchThird">
